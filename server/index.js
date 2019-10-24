@@ -4,6 +4,7 @@ const massive = require('massive');
 const session = require('express-session');
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 const authCtrl = require('./controllers/authController');
+const mainCtrl = require('./controllers/mainController');
 const app = express();
 
 app.use(express.json());
@@ -26,6 +27,8 @@ app.post('/auth/login', authCtrl.login)
 app.post('/auth/register', authCtrl.register)
 app.post('/auth/logout', authCtrl.logout)
 app.post('/auth/user', authCtrl.getUser)
+
+app.put('/api/balance', mainCtrl.updateBalance)
     
 const port = SERVER_PORT;
 app.listen(port, () => console.log(`Server running on port ${port}`));
